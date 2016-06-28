@@ -1,2 +1,47 @@
 
-Hi
+
+*Rake*
+========
+Rake is Ruby Make, a standalone Ruby utility that replaces the Unix utility ‘make’, and uses a ‘Rakefile’ and .rake files to build up a list of tasks. In Rails, Rake is used for common administration tasks, especially sophisticated ones that build off of each other.
+
+“rake will execute different tasks(basically a set of ruby code) specified in any file with .rake extension from comandline.”
+
+
+  simple rake task example to print 'hello' in commandline
+  ------------------------------------------------
+
+  namespace :demo do
+    desc "rake simple hello"
+    task say_hello: :environment do
+      puts "Hello"
+    end
+  end
+  
+  To run above rake task
+  -----------------------
+  
+  - open command line 
+  - go to your project path
+  - run
+  
+  > rake demo:say_hello                                 #rake namespace_name:task_name
+  #=> Hello
+  
+  rake task to import data from csv files
+  ---------------------------------------
+  
+    namespace :import do
+      desc "rake import data from person csv files"
+      task data: :environment do
+        require 'csv'
+        CSV.foreach('db/data/person.csv', :headers => true) do |row|
+          Person.create!(row.to_hash)
+        end
+      end
+    end
+    
+    Run
+    ----
+    
+    > rake import:data                    #csv file data should be saved to Person model                                 
+
