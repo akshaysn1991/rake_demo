@@ -30,9 +30,9 @@ Rake is Ruby Make, a standalone Ruby utility that replaces the Unix utility ‘m
   rake task to import data from csv files
   ---------------------------------------
   
-    namespace :import do
+    namespace :demo do
       desc "rake import data from person csv files"
-      task data: :environment do
+      task import: :environment do
         require 'csv'
         CSV.foreach('db/data/person.csv', :headers => true) do |row|
           Person.create!(row.to_hash)
@@ -43,5 +43,5 @@ Rake is Ruby Make, a standalone Ruby utility that replaces the Unix utility ‘m
     Run
     ----
     
-    > rake import:data                    #csv file data should be saved to Person model                                 
+    > rake demo:import                    #csv file data should be saved to Person model                                 
 
