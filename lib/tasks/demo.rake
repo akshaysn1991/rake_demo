@@ -3,9 +3,11 @@ namespace :demo do
   task say_hello: :environment do
     puts "Hello"
   end
+end
 
+namespace :import do
   desc "rake import data from person csv files"
-  task import: :environment do
+  task person_data: :environment do
     require 'csv'
     CSV.foreach('db/data/person.csv', :headers => true) do |row|
       Person.create!(row.to_hash)
@@ -13,7 +15,7 @@ namespace :demo do
   end
 
   desc "rake import data from product csv files"
-  task import_product: :environment do
+  task product_data: :environment do
     require 'csv'
     CSV.foreach('db/data/product.csv', :headers => true) do |row|
       name = row[0]
